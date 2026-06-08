@@ -1,0 +1,56 @@
+<p-toast></p-toast>
+<div class="container-fluid">
+    <div class="div-container">
+        <p class="pi pi-objects-column mt-2"> Productos BD:</p>
+        <div class="content-2">
+            <div class="item-2">
+                <p-table #dt1 [value]="data" styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines"
+                    class="custom-table" [tableStyle]="{ 'min-width':'50rem'}" [scrollable]="true" dataKey="codProd"
+                    [paginator]="true" [rows]="50" [globalFilterFields]="['codProd', 'descripcion']"
+                    selectionMode="single">
+                    <ng-template #caption class="custom-iconfield">
+                        <p-iconfield iconPosition="left" class="custom-iconfield">
+                            <p-inputicon>
+                                <i class="pi pi-search"></i>
+                            </p-inputicon>
+                            <input pInputText type="text" [(ngModel)]="globalFilter"
+                                (input)="dt1.filterGlobal(globalFilter, 'contains')"
+                                placeholder="Digite nombre producto" />
+                        </p-iconfield>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 100px;">Código producto</th>
+                            <th style="width: 300px;">Descripción</th>
+                            <th style="width: 50px;" class="centered">Existencia</th>
+                            <th style="width: 150px;">Precio venta</th>
+                            <th style="width: 150px;">Fecha creación</th>
+                            <th pSortableColumn="updated_at">
+                                <div class="flex items-center gap-2">
+                                    Fecha ultimo toque
+                                    <p-sortIcon field="updated_at" />
+                                </div>
+                            </th>
+                            <th style="width: 100px;" class="centered">Acción</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-dataProductos>
+                        <tr>
+                            <td style="width: 100px;">{{dataProductos.codProd}}</td>
+                            <td style="width: 300px;">{{dataProductos.descripcion}}</td>
+                            <td style="width: 50px;" class="centered">{{dataProductos.existencia}}</td>
+                            <td style="width: 150px;">{{dataProductos.precio_venta | currency: 'USD'}}</td>
+                            <td style="width: 150px;">{{dataProductos.createAt | date:'dd-MM-yyyy'}}</td>
+                            <td style="width: 150px;">{{dataProductos.updated_at | date:'dd-MM-yyyy'}}</td>
+                            <td style="flex: 5rem 5rem 5rem" class="centered">
+                                <button pButton pRipple type="button"
+                                    class="p-button-rounded p-button-text p-button-plain p-button-sm p-button2 pi pi-trash"
+                                    (click)="funct_elimina_productos(dataProductos);"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>

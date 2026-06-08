@@ -1,0 +1,290 @@
+@media screen and (max-width: 1366px) {
+    .div-container {
+        border-radius: 5px;
+        padding: 0px;
+        width: 100%;
+        max-height: 91vh;
+        margin-top: 5px;
+    }
+
+    .content-2 {
+        display: flex;
+        flex-direction: column;
+        border-radius: 5px;
+        padding: 0px;
+        max-height: 82.5vh;
+        border: 2px solid #d4d4d4;
+    }
+
+    .item-2 {
+        margin: 0;
+    }
+
+    :host ::ng-deep .custom-table {
+        max-width: 100%;
+        height: 80vh;
+        overflow-x: auto;
+        background: #304772;
+        border-radius: 5px;
+        padding: 5px;
+    }
+
+    :host ::ng-deep .p-datatable .p-datatable-tbody>tr {
+        padding: 0.2rem 0.3rem;
+        font-size: 7px;
+        color: white;
+        border: 1px solid white !important;
+        background: #304772;
+    }
+
+    :host ::ng-deep .p-datatable .p-datatable-thead>tr>th,
+    :host ::ng-deep .p-datatable .p-datatable-tbody>tr>td {
+        padding: 0.3rem 0.5rem;
+        background: #304772;
+        color: white;
+        font-size: 8px;
+    }
+
+
+    :host ::ng-deep .p-inputtext {
+        border-color: black;
+        width: 100% !important;
+        height: 5vh;
+    }
+}
+
+@media screen and (max-width: 1440px) {
+    .div-container {
+        border-radius: 5px;
+        padding: 5px;
+        width: 100%;
+        height: 92vh;
+        margin-top: 5px;
+    }
+
+    .content-2 {
+        display: flex;
+        flex-direction: column;
+        border-radius: 5px;
+        padding: 0px;
+        height: 85vh;
+        border: 2px solid #d4d4d4;
+    }
+
+    .item-2 {
+        margin: 0;
+    }
+
+    :host ::ng-deep .custom-table {
+        max-width: 100%;
+        max-height: 83vh;
+        overflow-x: auto;
+        background: #304772;
+        border-radius: 5px;
+        padding: 5px;
+    }
+
+    :host ::ng-deep .p-datatable .p-datatable-tbody>tr {
+        padding: 0.2rem 0.3rem;
+        font-size: 12px;
+        color: white;
+        border: 1px solid white !important;
+        background: #304772;
+    }
+
+    :host ::ng-deep .p-datatable .p-datatable-thead>tr>th,
+    :host ::ng-deep .p-datatable .p-datatable-tbody>tr>td {
+        padding: 0.3rem 0.5rem;
+        background: #304772;
+        color: white;
+        font-size: 12px;
+    }
+
+    :host ::ng-deep .p-inputtext {
+        border-color: black;
+        width: 100% !important;
+        height: 5vh;
+    }
+}
+
+
+@media screen and (min-width: 1600px) {
+    .div-container {
+        border-radius: 5px;
+        padding: 10px;
+        width: 100%;
+        height: 92vh;
+        margin-top: 5px;
+    }
+
+    .content-2 {
+        display: flex;
+        flex-direction: column;
+        border-radius: 5px;
+        padding: 0px;
+        height: 84vh;
+        border: 2px solid #d4d4d4;
+    }
+
+    .item-2 {
+        margin: 0;
+    }
+
+    :host ::ng-deep .custom-table {
+        max-width: 100%;
+        max-height: 83vh;
+        overflow-x: auto;
+        background: #304772;
+        border-radius: 5px;
+        padding: 5px;
+    }
+
+    :host ::ng-deep .p-datatable .p-datatable-tbody>tr {
+        padding: 0.2rem 0.3rem;
+        font-size: 12px;
+        color: white;
+        border: 1px solid white !important;
+        background: #304772;
+    }
+
+    :host ::ng-deep .p-datatable .p-datatable-thead>tr>th,
+    :host ::ng-deep .p-datatable .p-datatable-tbody>tr>td {
+        padding: 0.3rem 0.5rem;
+        background: #304772;
+        color: white;
+        font-size: 12px;
+    }
+
+    :host ::ng-deep .p-inputtext {
+        border-color: black;
+        width: 100% !important;
+        height: 5vh;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    .div-container {
+        border-radius: 5px;
+        padding: 10px;
+        width: 100%;
+        height: 93vh;
+        margin-top: 5px;
+    }
+
+    .content-2 {
+        display: flex;
+        flex-direction: column;
+        border-radius: 5px;
+        padding: 0px;
+        height: 87vh;
+        border: 2px solid #d4d4d4;
+    }
+
+    .item-2 {
+        margin: 0;
+    }
+
+    :host ::ng-deep .custom-table {
+        max-width: 100%;
+        max-height: 86vh;
+        overflow-x: auto;
+        background: #304772;
+        border-radius: 5px;
+        padding: 5px;
+    }
+
+    :host ::ng-deep .p-datatable .p-datatable-tbody>tr {
+        padding: 0.2rem 0.3rem;
+        font-size: 12px;
+        color: white;
+        border: 1px solid white !important;
+        background: #304772;
+    }
+
+    :host ::ng-deep .p-datatable .p-datatable-thead>tr>th,
+    :host ::ng-deep .p-datatable .p-datatable-tbody>tr>td {
+        padding: 0.3rem 0.5rem;
+        background: #304772;
+        color: white;
+        font-size: 13px;
+    }
+
+    :host ::ng-deep .p-inputtext {
+        border-color: black;
+        width: 100% !important;
+        height: 5vh;
+    }
+}
+
+.custom-table tr {
+    color: white;
+    border: 1px solid white !important;
+    height: 5px !important;
+    background: #304772;
+}
+
+.custom-table th {
+    background: #304772;
+    color: white;
+    height: 5px !important;
+    text-align: left;
+}
+
+:host ::ng-deep .p-paginator {
+    background: #304772;
+}
+
+:host ::ng-deep .p-paginator .p-paginator-page,
+:host ::ng-deep .p-paginator .p-paginator-next,
+:host ::ng-deep .p-paginator .p-paginator-prev {
+    background-color: aliceblue;
+    border-radius: 5px;
+    color: black;
+}
+
+span {
+    color: white
+}
+
+label {
+    color: white;
+    font-size: 14px;
+}
+
+p {
+    color: white;
+    font: bold;
+    font-size: 18px;
+}
+
+hr {
+    color: white;
+    border: 2px solid;
+}
+
+
+.dropdown-w {
+    width: 50px;
+    height: 28px;
+}
+
+.margin-top {
+    margin: 1% auto;
+    margin-bottom: 5%;
+}
+
+:host ::ng-deep .p-button2 {
+    border-radius: 3px;
+    margin-right: .2rem;
+    color: white;
+    width: 35px !important;
+    height: 30px;
+}
+
+:host ::ng-deep .p-button2:hover {
+    border-radius: 3px;
+    margin-right: .2rem;
+    background-color: red;
+    color: white;
+    font: bold;
+}

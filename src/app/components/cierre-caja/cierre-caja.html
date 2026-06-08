@@ -1,0 +1,34 @@
+<p-toast></p-toast>
+<div class="container-fluid">
+    <div class="div-conten">
+        <p class="pi pi-sitemap"> Cuadre de caja:</p>
+        <br>
+        <span> Fecha apertura:
+            {{fecha_actual}}
+        </span>
+        <hr>
+        <div class="content">
+            <form [formGroup]="formId">
+                <div class="item">
+                    <div class="flex flex-col">
+                        <label for="idcaja">Id caja</label>
+                        <p-inputNumber id="idcaja" inputId="integeronly" [(ngModel)]="idCaja" formControlName="idCaja"
+                            [readonly]="true"></p-inputNumber>
+                    </div>
+                </div>
+            </form>
+            <div class="item">
+                <div class="flex flex-col">
+                    <button pButton pRipple type="button" label="1 - Imprimir ventas" icon="pi pi-print" iconPos="left"
+                        class="p-button-success w-full" (click)="functImprimeCuadreCaja();"></button>
+                </div>
+            </div>
+            <div class="item">
+                <div class="flex flex-col">
+                    <button pButton pRipple type="button" label="2 - Migrar ventas" icon="pi pi-file-import"
+                        iconPos="left" class="p-button-warn w-full" (click)="funct_nex_model_exportar();"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
