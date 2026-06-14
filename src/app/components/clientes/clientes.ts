@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { ToastModule } from 'primeng/toast';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-clientes',
@@ -19,6 +20,7 @@ import { ButtonModule } from 'primeng/button';
     FormsModule,
     ToastModule,
     InputTextModule,
+    SelectModule,
     ButtonModule
   ],
   providers: [MessageService],
@@ -29,6 +31,8 @@ export class Clientes {
   data_proveedor: any[] = [];
   fecha_actual?: string;
   date: Date = new Date();
+  options: any[] = [];
+  seleccionado: any = null;
 
   constructor(
     private fb: FormBuilder,
@@ -38,9 +42,15 @@ export class Clientes {
 
   ngOnInit(): void {
     this.data = this.fb.group({
-      cedula: ['', Validators.required],
-      nombre_cliente: ['', Validators.required],
-      telefono: ['', Validators.required],
+      tipo_ident: ['', Validators.required],
+      ident: ['', Validators.required],
+      nombre: ['', Validators.required],
+      munic: ['', Validators.required],
+      telef: ['', Validators.required],
+      correo: ['', Validators.required],
+      tipo_org: ['', Validators.required],
+      tipo_resp: ['', Validators.required],
+      tipo_reg: ['', Validators.required],
     });
     this.fecha_actual = format(this.date, 'yyyy-MM-dd HH:mm:ss');
   }
@@ -60,6 +70,15 @@ export class Clientes {
   }
 
   funct_registra_clientes_c() {
+    if (this.data.invalid) {
+      this.data.markAllAsTouched();
+      for (const key in this.data.controls) {
+        this.data.controls[key].markAsDirty();
+      }
+      this.message.add({ severity: 'warn', summary: 'Advertencia:', detail: 'Todos los campos del formulario son obligatorios' });
+      return;
+    }
+
     this.cliente.funct_registra_clientes_s(this.data.value).subscribe({
       next: (data: any) => {
         const obj = JSON.stringify(data);

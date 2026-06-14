@@ -41,12 +41,13 @@
                 (click)="funt_dialog_busca_productos()" />
         </div>
         <div class="item-1-2">
-            <button pButton pRipple type="button" icon="pi pi-cart-plus" class="p-button-rounded p-button-success"
+            <button pButton pRipple type="button" icon="pi pi-cart-plus" class="p-button-rounded p-button-warn"
                 title="Otras ventas" (click)="funct_dialog_otras_ventas();"></button>
         </div>
         <div class="item-1-2">
-            <button pButton pRipple type="button" icon="pi pi-save" class="p-button-rounded p-button-help"
-                title="Guardar e Imprimir" [disabled]="habilitado" (click)="funct_dialog_detalle_factura();"></button>
+            <button pButton pRipple type="button" icon="pi pi-pound" class="p-button-rounded p-button-success"
+                title="Facturación electrónica" [disabled]="habilitado"
+                (click)="funct_dialog_detalle_factura();"></button>
         </div>
         <div class="item-1-2">
             <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger"
