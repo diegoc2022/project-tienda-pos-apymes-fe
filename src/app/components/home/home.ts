@@ -46,7 +46,7 @@ export class Home {
           styleClass: 'icon-color',
           items: [
             { label: 'Nuevo producto', icon: 'pi pi-fw pi-caret-right', routerLink: ['nuevo-producto'] },
-            { label: 'Nuevo cliente', icon: 'pi pi-fw pi-caret-right', routerLink: ['nuevo-cliente'] },
+            { label: 'Nuevo cliente', icon: 'pi pi-fw pi-caret-right', routerLink: ['cliente-fe'] },
             { label: 'Nuevo proveedor', icon: 'pi pi-fw pi-caret-right', routerLink: ['nuevo-proveedor'] },
             { label: 'Nuevo empleado', icon: 'pi pi-fw pi-caret-right', routerLink: ['nuevo-empleado'] },
             { label: 'Movimientos x mes', icon: 'pi pi-fw pi-caret-right', routerLink: ['movimientos'] },

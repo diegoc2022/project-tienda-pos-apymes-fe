@@ -23,4 +23,5 @@ export class AperturaCajaService {
   funct_retorna_apertura_caja(user: string) {
     return this.http.get(`${this.URL}/${this.API}/${user}`);
   }
+
 }

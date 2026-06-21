@@ -1,0 +1,399 @@
+@media screen and (max-width: 1366px) {
+    .div-container {
+        border: 1px solid #d4d4d4;
+        border-radius: 5px;
+        padding: 10px;
+        width: 46vw;
+        height: 62vh;
+        margin-left: 7px;
+        margin-top: 10px;
+    }
+
+    .content-1 {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+    }
+
+    .item-1 {
+        margin: 0;
+        width: 12vw;
+    }
+
+    .item-1-1 {
+        margin: 0;
+        width: 18vw;
+    }
+
+    .content-2 {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        ;
+    }
+
+    .item-2 {
+        margin: 0;
+        width: 12vw;
+    }
+
+    .item-2-1 {
+        margin: 0;
+        width: 18vw;
+    }
+
+    .content-3 {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+    }
+
+    .item-3 {
+        margin: 0;
+        width: 12vw;
+    }
+
+    .item-3-1 {
+        margin: 0;
+        width: 18vw;
+    }
+
+    .content-4 {
+        display: flex;
+        flex-direction: row;
+        text-align: right;
+        gap: 5px;
+    }
+
+    .item-4 {
+        margin: 0;
+        width: 100%;
+    }
+
+
+    :host ::ng-deep .p-inputtext,
+    .p-select {
+        border-color: black;
+        width: 100%;
+        height: 5vh;
+    }
+
+    .input-pers {
+        border-color: black;
+        width: 19.5vw;
+        height: 5vh;
+    }
+
+    .w-full {
+        width: 19.5vw !important;
+        height: 38px;
+        border-radius: 5px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .div-container {
+        border: 2px solid #d4d4d4;
+        border-radius: 5px;
+        padding: 10px;
+        width: 46vw;
+        height: 55vh;
+        margin-left: 7px;
+        margin-top: 10px;
+    }
+
+    .content-1 {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+    }
+
+    .item-1 {
+        margin: 0;
+        width: 12vw;
+    }
+
+    .item-1-1 {
+        margin: 0;
+        width: 18vw;
+    }
+
+    .content-2 {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        ;
+    }
+
+    .item-2 {
+        margin: 0;
+        width: 12vw;
+    }
+
+    .item-2-1 {
+        margin: 0;
+        width: 18vw;
+    }
+
+    .content-3 {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+    }
+
+    .item-3 {
+        margin: 0;
+        width: 12vw;
+    }
+
+    .item-3-1 {
+        margin: 0;
+        width: 18vw;
+    }
+
+    .content-4 {
+        display: flex;
+        flex-direction: row;
+        text-align: right;
+        gap: 5px;
+    }
+
+    .item-4 {
+        margin: 0;
+        width: 100%;
+    }
+
+
+    :host ::ng-deep .p-inputtext,
+    .p-select {
+        border-color: black;
+        width: 100%;
+        height: 5vh;
+    }
+
+    .input-pers {
+        border-color: black;
+        width: 19.5vw;
+        height: 5vh;
+    }
+
+    .w-full {
+        width: 19.4vw !important;
+        height: 40px;
+        border-radius: 5px;
+    }
+}
+
+@media screen and (mIN-width: 1600px) {
+    .div-container {
+        border: 1px solid #d4d4d4;
+        border-radius: 5px;
+        padding: 10px;
+        width: 45vw;
+        height: 55vh;
+        margin-left: 7px;
+        margin-top: 10px;
+    }
+
+    .content-1 {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+    }
+
+    .item-1 {
+        margin: 0;
+        width: 12vw;
+    }
+
+    .item-1-1 {
+        margin: 0;
+        width: 18vw;
+    }
+
+    .content-2 {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        ;
+    }
+
+    .item-2 {
+        margin: 0;
+        width: 12vw;
+    }
+
+    .item-2-1 {
+        margin: 0;
+        width: 18vw;
+    }
+
+    .content-3 {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+    }
+
+    .item-3 {
+        margin: 0;
+        width: 12vw;
+    }
+
+    .item-3-1 {
+        margin: 0;
+        width: 18vw;
+    }
+
+    .content-4 {
+        display: flex;
+        flex-direction: row;
+        text-align: right;
+        gap: 5px;
+    }
+
+    .item-4 {
+        margin: 0;
+        width: 100%;
+    }
+
+
+    :host ::ng-deep .p-inputtext,
+    .p-select {
+        border-color: black;
+        width: 100%;
+        height: 5vh;
+    }
+
+    .input-pers {
+        border-color: black;
+        width: 19vw;
+        height: 5vh;
+    }
+
+    .w-full {
+        width: 19vw !important;
+        height: 40px;
+        border-radius: 5px;
+    }
+}
+
+@media screen and (mIN-width: 1920px) {
+    .div-container {
+        border: 1px solid #d4d4d4;
+        border-radius: 5px;
+        padding: 10px;
+        width: 43vw;
+        height: 45vh;
+        margin-left: 7px;
+        margin-top: 10px;
+    }
+
+    .content-1 {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+    }
+
+    .item-1 {
+        margin: 0;
+        width: 12vw;
+    }
+
+    .item-1-1 {
+        margin: 0;
+        width: 18vw;
+    }
+
+    .content-2 {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        ;
+    }
+
+    .item-2 {
+        margin: 0;
+        width: 12vw;
+    }
+
+    .item-2-1 {
+        margin: 0;
+        width: 18vw;
+    }
+
+    .content-3 {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+    }
+
+    .item-3 {
+        margin: 0;
+        width: 12vw;
+    }
+
+    .item-3-1 {
+        margin: 0;
+        width: 18vw;
+    }
+
+    .content-4 {
+        display: flex;
+        flex-direction: row;
+        text-align: right;
+        gap: 5px;
+    }
+
+    .item-4 {
+        margin: 0;
+        width: 100%;
+    }
+
+
+    :host ::ng-deep .p-inputtext,
+    .p-select {
+        border-color: black;
+        width: 12vw;
+        height: 4.5vh;
+    }
+
+    .input-pers {
+        border-color: black;
+        width: 17.4vw;
+        height: 4.5vh;
+    }
+
+    .w-full {
+        width: 17.5vw !important;
+        height: 40px;
+        border-radius: 5px;
+    }
+
+}
+
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+span {
+    color: white
+}
+
+label {
+    color: white;
+    font-size: 14px;
+}
+
+p {
+    color: white;
+    font: bold;
+    font-size: 18px;
+}
+
+hr {
+    color: white;
+    border: 2px solid;
+}

@@ -49,7 +49,7 @@ export class InventarioActual {
   }
 
   funct_retorna_productos() {
-    this.productos.funct_retorna_full_productos().subscribe({
+    this.productos.funct_retorna_productos().subscribe({
       next: (data: any) => {
         this.inventario_actual = [];
         for (let index = 0; index < data.length; index++) {

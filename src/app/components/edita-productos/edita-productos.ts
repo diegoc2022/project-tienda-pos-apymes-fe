@@ -68,7 +68,7 @@ export class EditaProductos {
 
   funct_retorna_productos() {
     this.dataBuscaProductos.length = 0;
-    this.productos.funct_retorna_full_productos().subscribe({
+    this.productos.funct_retorna_productos().subscribe({
       next: (data: any) => {
         for (let index = 0; index < data.length; index++) {
           this.dataBuscaProductos.push(data[index]);
@@ -142,7 +142,7 @@ export class EditaProductos {
       return
     }
 
-    this.productos.funct_edita_productos_s(this.formData.value).subscribe({
+    this.productos.funct_edita_codigo_nombre_productos_s(this.formData.value).subscribe({
       next: (data: any) => {
         this.vinculos.funct_registra_vinculos_s(this.dataVinculos).subscribe({
           next: (data2: any) => {

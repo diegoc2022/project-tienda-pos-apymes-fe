@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
@@ -36,7 +36,6 @@ export class OtrasVentas {
   data: FormGroup = new FormGroup({});
   data2: FormGroup = new FormGroup({});
   objData: any[] = [];
-  selectedProduct1?: any;
   visibleEnc: boolean = false;
   dataService$?: Subscription;
   origen_venta: string = 'Ventas-1';
@@ -45,10 +44,11 @@ export class OtrasVentas {
   idApertCaja?: number;
   idVentas: number = 0;
   factura: number = 0;
-  user: any;
   fecha_apertura: any = '';
   fecha_actual: any = ''
-  date: Date = new Date
+  date: Date = new Date;
+  user: any = '';
+  data_venta: any[] = [];
 
   constructor(
     private message: MessageService,
@@ -115,7 +115,13 @@ export class OtrasVentas {
     let factura = localStorage.getItem('factura');
     this.apertura.funct_retorna_apertura_caja(this.user).subscribe({
       next: (data: any) => {
-        this.ventas.funct_registra_ventas_temp(this.data2.value, this.origen_venta, this.openventas, data.id_caja, factura).subscribe({
+        this.data_venta.push({
+          data: [this.data2.value],
+          id_caja: data[0].id_caja,
+          factura: factura
+        })
+
+        this.ventas.funct_registra_ventas_temp(this.data_venta).subscribe({
           next: datar => {
             this.objData.length = 0;
             this.data.reset();
@@ -125,16 +131,12 @@ export class OtrasVentas {
             this.data2.get('cant')?.setValue('');
             this.data2.get('precio_venta')?.setValue('');
             this.formventas.funct_retorna_ventas();
+            this.cdr.detectChanges();
           }
         })
       }
     })
 
-
-  }
-
-  ngOnDestroy(): void {
-    this.dataService$?.unsubscribe();
   }
 
   functInpuFocus() {

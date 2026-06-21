@@ -9,14 +9,12 @@ import { Observable } from 'rxjs';
 export class VinculosService {
   private URL: string;
   private API: string;
+  private API2: string;
 
   constructor(private http: HttpClient) {
     this.URL = Environment.endpoint;
     this.API = 'vinculos';
-  }
-
-  ngOnInit(): void {
-
+    this.API2 = 'venta-producto';
   }
 
   funct_registra_vinculos_s(data: any): Observable<any> {
@@ -40,7 +38,7 @@ export class VinculosService {
   }
 
   func_activa_asociacion_unidad_s(cod: any, estado: boolean): Observable<any> {
-    return this.http.patch(`${this.URL}/${this.API}/activar/${cod}`, {
+    return this.http.patch(`${this.URL}/${this.API2}/activar/${cod}`, {
       "venta_por_und": estado
     });
   }

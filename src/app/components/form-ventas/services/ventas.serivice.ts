@@ -26,13 +26,6 @@ export class VentasSerivice {
     this.API4 = 'close-ventas';
   }
 
-
-  funct_edita_precio_ventas_s(cod: any, data: any) {
-    return this.http.patch(`${this.URL}/${this.API}/precioVentas/${cod}`, {
-      "precio_venta": data
-    });
-  }
-
   func_activa_asociacion_unidad_s(cod: any, estado: boolean): Observable<any> {
     return this.http.patch(`${this.URL}/${this.API}/activar/${cod}`, {
       "venta_por_und": estado
@@ -70,11 +63,7 @@ export class VentasSerivice {
   }
 
   funct_edita_cantidad_venta_s(data: any) {
-    this.subtotal = data.cantidad * data.precio_venta;
-    return this.http.patch(`${this.URL}/${this.API3}/${data.id}/${data.codProd}`, {
-      "cantidad": data.cantidad,
-      "subtotal": this.subtotal
-    });
+    return this.http.patch(`${this.URL}/${this.API3}/${data.id}/${data.codProd}`, data);
   }
 
   funct_close_ventas_temp(data: any) {
@@ -96,35 +85,7 @@ export class VentasSerivice {
   }
 
 
-  funct_registra_ventas_temp(registraVentas: any, data: any, accion: any, idCaja: any, fact: any): Observable<any> {
-    this.cantidad = 1;
-    const prefijo = 'C1-';
-    const user = localStorage.getItem('user');
-    this.total = this.cantidad * registraVentas.precio_venta;
-    const fecha_actual = format(this.form_fecha, 'd-M-yyyy');
-    const mes = format(this.form_fecha, 'M');
-    const year = format(this.form_fecha, 'yyyy');
-    const hora_actual = format(this.form_fecha, 'HH:mm');
-    return this.http.post<any>(`${this.URL}/${this.API3}`, {
-      "id_venta": prefijo + 0,
-      "id_caja": idCaja,
-      "codProd": registraVentas.codProd,
-      "descripcion": registraVentas.descripcion,
-      "cantidad": this.cantidad,
-      "existencia": registraVentas.existencia,
-      "precio_compra": registraVentas.precio_compra,
-      "precio_venta": this.total,
-      "origen_venta": data,
-      "subtotal": this.total,
-      "vendedor": user,
-      "estado": accion,
-      "factura": fact,
-      "venta_por_und": registraVentas.venta_por_und,
-      "num_mes": mes,
-      "num_year": year,
-      "fecha_registro": fecha_actual,
-      "hora_registro": hora_actual
-    })
-
+  funct_registra_ventas_temp(data: any[]): Observable<any> {
+    return this.http.post<any>(`${this.URL}/${this.API3}`, data);
   }
 }

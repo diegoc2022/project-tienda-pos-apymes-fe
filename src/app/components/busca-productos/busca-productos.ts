@@ -52,11 +52,12 @@ export class BuscaProductos {
   idVentas: number = 0;
   prefijo_rem: string = '';
   codigo: string = '';
-  user: any;
   globalFilter = ''
   fecha_apertura: any = '';
   fecha_actual: any = ''
   date: Date = new Date
+  user: any = '';
+  data_venta: any[] = [];
 
   constructor(
     private message: MessageService,
@@ -78,7 +79,7 @@ export class BuscaProductos {
 
 
   funct_retorna_productos() {
-    this.productos.funct_retorna_full_productos().subscribe({
+    this.productos.funct_retorna_productos().subscribe({
       next: (data: any) => {
         this.dataBuscaProductos = []
         for (let index = 0; index < data.length; index++) {
@@ -105,9 +106,17 @@ export class BuscaProductos {
 
         let factura = localStorage.getItem('factura');
         this.apertura.funct_retorna_apertura_caja(this.user).subscribe({
-          next: (data: any) => {
-            const obj = JSON.parse(JSON.stringify(data));
-            this.ventas.funct_registra_ventas_temp(result[0].producto, this.origen_ventas, this.openventas, obj.id_caja, factura).subscribe({
+          next: (result2: any) => {
+            this.data_venta = [];
+            this.data_venta.push({
+              data: [result[0].producto],
+              id_caja: result2.id_caja,
+              factura: factura,
+              user: this.user,
+              sucursal: 1
+            });
+
+            this.ventas.funct_registra_ventas_temp(this.data_venta).subscribe({
               next: (resp: any) => {
                 this.formventas.funct_retorna_ventas();
                 this.formventas.functInpuFocus();

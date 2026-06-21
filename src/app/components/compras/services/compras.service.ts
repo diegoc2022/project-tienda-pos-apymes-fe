@@ -43,12 +43,6 @@ export class ComprasService {
     return this.http.get(`${this.URL}/${this.API}/result/${fecha_inic}/${fecha_fin}`);
   }
 
-  funct_edita_precio_compras_s(cod: any, data: any) {
-    return this.http.patch(`${this.URL}/${this.API2}/precioCompras/${cod}`, {
-      "precio_compra": data
-    });
-  }
-
   funct_retorna_compras_facturas_s(factura: any) {
     return this.http.get(`${this.URL}/${this.API3}/${factura}`);
   }

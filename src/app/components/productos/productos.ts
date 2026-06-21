@@ -37,7 +37,11 @@ export class Productos {
   fecha_actual?: string;
   date: Date = new Date();
   seleccionado: any = null;
+  seleccionado2: any = null;
+  seleccionado3: any = null;
   dataVinculos: any[] = [];
+  categoria: any[] = [];
+  impuestos: any[] = [];
 
 
   constructor(
@@ -61,10 +65,13 @@ export class Productos {
     this.formProductos = this.fb.group({
       codProd: ['', Validators.required],
       nombre: ['', Validators.required],
+      valor_iva: ['', Validators.required],
+      categoria: ['', Validators.required],
       codProv: ['', Validators.required]
     });
     this.fecha_actual = format(this.date, 'yyyy-MM-dd HH:mm:ss');
-
+    this.funct_retorna_impuestos();
+    this.funct_retorna_categoria();
   }
 
   on_enter_codigo_producto(event: any) {
@@ -79,6 +86,34 @@ export class Productos {
       this.select.focus();
       this.select.show();
     }
+  }
+
+  funct_retorna_impuestos() {
+    this.productos.funct_retorna_impuestos().subscribe({
+      next: (data: any) => {
+        this.impuestos = [];
+        data.map((resp: any) => {
+          this.impuestos.push({
+            id: resp.id,
+            valor_iva: resp.valor_iva
+          });
+        })
+      }
+    })
+  }
+
+  funct_retorna_categoria() {
+    this.productos.funct_retorna_categoria().subscribe({
+      next: (data: any) => {
+        this.categoria = [];
+        data.map((resp: any) => {
+          this.categoria.push({
+            id: resp.id,
+            nombre: resp.nombre
+          });
+        })
+      }
+    })
   }
 
   funct_registra_nuevo_producto() {

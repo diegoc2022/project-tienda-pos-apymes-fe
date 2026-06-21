@@ -45,7 +45,6 @@ export class AperturaCaja {
     this.formId = this.fb.group({
       base: [null, Validators.required]
     });
-
     this.user = localStorage.getItem('user');
     this.fecha_actual = format(this.date, 'yyyy-MM-dd');
   }
@@ -60,7 +59,6 @@ export class AperturaCaja {
         this.apertura.funct_apertura_caja(id, id_caja, this.formId.value.base).subscribe({
           next: (obj: any) => {
             const data = JSON.parse(JSON.stringify(obj));
-            localStorage.setItem('id_caja', data.id_caja);
             localStorage.setItem('fecha_apertura', this.fecha_actual);
             this.formId.setValue({ base: 0 });
             this.messageService.add({ severity: 'success', summary: 'Informativo:', detail: 'Se ha generado nueva Apertura de Caja número: ' + data.id_caja });

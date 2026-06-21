@@ -9,7 +9,6 @@ import { CerrarSesion } from './components/cerrar-sesion/cerrar-sesion';
 import { Vinculos } from './components/vinculos/vinculos';
 import { AjustePrecios } from './components/ajuste-precios/ajuste-precios';
 import { Inventario } from './components/inventario/inventario';
-import { Clientes } from './components/clientes/clientes';
 import { Empleados } from './components/empleados/empleados';
 import { MovimientosXMes } from './components/movimientos-x-mes/movimientos-x-mes';
 import { Gastos } from './components/gastos/gastos';
@@ -30,6 +29,8 @@ import { EditaProductos } from './components/edita-productos/edita-productos';
 import { AperturaInventario } from './components/apertura-inventario/apertura-inventario';
 import { InventarioActual } from './components/inventario-actual/inventario-actual';
 import { ConsultarInventario } from './components/consultar-inventario/consultar-inventario';
+import { ClientesFe } from './components/clientes-fe/clientes-fe';
+import { Clientes } from './components/clientes/clientes';
 
 
 export const routes: Routes = [
@@ -60,7 +61,10 @@ export const routes: Routes = [
                 path: 'inventario-web', title: 'Inventario', component: Inventario,
             },
             {
-                path: 'nuevo-cliente', title: 'Crear cliente', component: Clientes
+                path: 'cliente-fe', title: 'Crear cliente FE', component: ClientesFe
+            },
+            {
+                path: 'clientes', title: 'Crear nuevo cliente', component: Clientes
             },
             {
                 path: 'nuevo-empleado', title: 'Empleados', component: Empleados,
