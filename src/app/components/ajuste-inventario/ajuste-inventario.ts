@@ -1,13 +1,14 @@
 import { ChangeDetectorRef, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { format } from 'date-fns';
-import { AjusteInvService } from './services/ajuste-inv.service';
 import { MessageService } from 'primeng/api';
 import { VinculosService } from '../vinculos/services/vinculos.service';
 import { ToastModule } from 'primeng/toast';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
+import { ProductosService } from '../productos/services/productos.service';
+import { format } from 'date-fns';
+
 
 @Component({
   selector: 'app-ajuste-inventario',
@@ -22,7 +23,7 @@ import { CommonModule } from '@angular/common';
     InputTextModule,
     ButtonModule
   ],
-  providers: [MessageService, AjusteInvService],
+  providers: [MessageService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AjusteInventario {
@@ -35,7 +36,7 @@ export class AjusteInventario {
   constructor(
     private fb: FormBuilder,
     private vinculos: VinculosService,
-    private inventario: AjusteInvService,
+    private product: ProductosService,
     private messageService: MessageService,
     private cdr: ChangeDetectorRef
   ) { }
@@ -50,7 +51,7 @@ export class AjusteInventario {
   }
 
 
-  functEditaCantidad() {
+  funct_edita_existencia() {
     if (this.data.invalid) {
       this.data.markAllAsTouched();
       for (const key in this.data.controls) {
@@ -61,7 +62,7 @@ export class AjusteInventario {
     }
 
     this.habilitado = true;
-    this.inventario.funct_ajusta_inventario_s(this.codigo_prod, this.data.value.cantidad).subscribe({
+    this.product.funct_ajusta_inventario_s(this.codigo_prod, this.data.value.cantidad).subscribe({
       next: (data: any) => {
         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Cantidad editada correctamente' });
         this.data.get('codigo')?.setValue('');

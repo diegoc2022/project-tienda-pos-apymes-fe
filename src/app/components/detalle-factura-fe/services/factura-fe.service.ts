@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import jsPDF from 'jspdf';
 import { VentasSerivice } from '../../form-ventas/services/ventas.serivice';
 import { EncabezadosServices } from '../../encabezados/encabezados';
+import jsPDF from 'jspdf';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ImprimeService {
+export class FacturaFeService {
   dataProductos: any[] = [];
   subTotal: number = 0;
 

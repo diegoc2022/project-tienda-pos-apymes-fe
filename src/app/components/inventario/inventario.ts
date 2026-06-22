@@ -251,7 +251,7 @@ export class Inventario {
   }
 
   funct_retorna_todos_los_productos() {
-    this.products.funct_retorna_full_productos().subscribe({
+    this.products.funct_retorna_productos().subscribe({
       next: (data: any) => {
         this.dataBuscaProductos = []
         for (let index = 0; index < data.length; index++) {

@@ -69,6 +69,8 @@
                             <th>Descripción</th>
                             <th>Existencia</th>
                             <th>Precio venta</th>
+                            <th>Iva %</th>
+                            <th>Total Iva</th>
                             <th class="centered">Cantidad</th>
                             <th>Subtotal</th>
                             <th class="centered">Acción</th>
@@ -90,6 +92,8 @@
                                     {{rowData.precio_venta | currency:'$'}}
                                 </div>
                             </td>
+                            <td>{{rowData.iva}}</td>
+                            <td>{{rowData.total_iva | currency}}</td>
                             <td pEditableColumn class="centered">
                                 <p-cellEditor>
                                     <ng-template pTemplate="input">

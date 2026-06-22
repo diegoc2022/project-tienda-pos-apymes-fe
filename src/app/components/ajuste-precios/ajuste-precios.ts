@@ -7,10 +7,9 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { VinculosService } from '../vinculos/services/vinculos.service';
-import { VentasSerivice } from '../form-ventas/services/ventas.serivice';
 import { CheckboxModule } from 'primeng/checkbox';
-import { ComprasService } from '../compras/services/compras.service';
 import { InputNumber, InputNumberModule } from 'primeng/inputnumber';
+import { ProductosService } from '../productos/services/productos.service';
 
 @Component({
   selector: 'app-ajuste-precios',
@@ -46,8 +45,7 @@ export class AjustePrecios {
     private fb: FormBuilder,
     private vinculos: VinculosService,
     private message: MessageService,
-    private editar: VentasSerivice,
-    private compras: ComprasService
+    private product: ProductosService
   ) { }
 
   ngOnInit(): void {
@@ -78,7 +76,7 @@ export class AjustePrecios {
   funct_edita_precios_c() {
     this.habilitado = true;
     if (this.onChecked == false) {
-      this.editar.funct_edita_precio_ventas_s(this.codigo_prod, this.data.value.precio).subscribe({
+      this.product.funct_edita_precio_ventas_s(this.codigo_prod, this.data.value.precio).subscribe({
         next: (data: any) => {
           this.message.add({ severity: 'success', summary: 'Successful', detail: 'Precio editado correctamente' });
           this.data.get('codigo')?.setValue('');
@@ -91,7 +89,7 @@ export class AjustePrecios {
         }
       });
     } else {
-      this.compras.funct_edita_precio_compras_s(this.codigo_prod, this.data.value.precio).subscribe({
+      this.product.funct_edita_precio_compras_s(this.codigo_prod, this.data.value.precio).subscribe({
         next: (data: any) => {
           this.message.add({ severity: 'success', summary: 'Successful', detail: 'Precio editado correctamente' });
           this.data.get('codigo')?.setValue('');

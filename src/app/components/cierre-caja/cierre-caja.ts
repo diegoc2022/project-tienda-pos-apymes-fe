@@ -41,7 +41,7 @@ export class CierreCaja {
   total_ventas_dia: any[] = [];
   otras_ventas: number = 0;
   total_gastos: number = 0;
-  user: any;
+  user: any = '';
 
   constructor(
     private ventas: VentasSerivice,
@@ -63,13 +63,13 @@ export class CierreCaja {
   funct_retorna_apertura_caja() {
     this.apertura.funct_retorna_apertura_caja(this.user).subscribe({
       next: (data: any) => {
-        const obj = JSON.parse(JSON.stringify(data));
+        console.log("Data: ", data);
         this.idCaja = 0;
         this.fecha_actual = '';
         this.base_caja = 0;
-        this.idCaja = obj.id_caja;
-        this.fecha_actual = obj.fecha_registro.substring(0, 10)
-        this.base_caja = obj.total_base;
+        this.idCaja = data[0].id_caja;
+        this.fecha_actual = data.fecha_registro.substring(0, 10)
+        this.base_caja = data.total_base;
         this.cdr.detectChanges();
       }
     })
@@ -78,20 +78,18 @@ export class CierreCaja {
   funct_retorna_ventas_del_dia() {
     return this.ventas.funct_retorna_ventas_id_caja(this.formId.value.idCaja).subscribe({
       next: (data: any) => {
-        const objData = JSON.stringify(data);
-        const result = JSON.parse(objData);
         this.ventasData.length = 0;
         this.total_ventas_dia.length = 0,
           this.total_varios = 0;
         this.otras_ventas = 0;
-        for (let index = 0; index < result.length; index++) {
-          this.ventasData.push(result[index]);
-          if (result[index].codProd == 'F10') {
-            this.otras_ventas += result[index].subtotal
-          } else if (result[index].codProd == 'F11') {
-            this.total_gastos += result[index].subtotal
+        for (let index = 0; index < data.length; index++) {
+          this.ventasData.push(data[index]);
+          if (data[index].codProd == 'F10') {
+            this.otras_ventas += data[index].subtotal
+          } else if (data[index].codProd == 'F11') {
+            this.total_gastos += data[index].subtotal
           } else {
-            this.total_varios += result[index].subtotal
+            this.total_varios += data[index].subtotal
           }
         }
         this.total_ventas_dia.push({

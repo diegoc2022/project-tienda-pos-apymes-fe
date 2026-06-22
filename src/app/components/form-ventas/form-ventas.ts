@@ -1,10 +1,9 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
-import { Subscription, switchMap, tap } from 'rxjs';
+import { switchMap, tap } from 'rxjs';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { VinculosService } from '../vinculos/services/vinculos.service';
 import { SecuenciaService } from '../secuencias/services/secuencia.service';
-import { ClientesService } from '../clientes/services/clientes.service';
 import { PagosConsumosServices } from '../pagos-consumos/services/pagos-consumos.services';
 import Swal, { SweetAlertOptions } from 'sweetalert2';
 import { VentasSerivice } from './services/ventas.serivice';
@@ -26,6 +25,9 @@ import { OverlayBadgeModule } from 'primeng/overlaybadge';
 import { DetalleFactura } from '../detalle-factura/detalle-factura';
 import { ImprimeService } from '../detalle-factura/services/imprime.service';
 import { format } from 'date-fns';
+import { ClientesService } from '../clientes/services/clientes.service';
+import { AperturaCajaService } from '../apertura-caja/services/apertura-caja.service';
+
 
 
 @Component({
@@ -65,14 +67,9 @@ export class FormVentas implements OnInit {
   formFactura: FormGroup = new FormGroup({});
   total_venta: number = 0;
   total_articulos: number = 1;
-  origen_venta: string = 'Ventas-1';
-  dataService$?: Subscription;
-  openventas: string = 'abierto1';
   idApertCaja: any = 0;
   factura: any = 0;
   habilitado: boolean = false;
-  visible2: boolean = false;
-  visible3: boolean = false;
   producto_unidad: any[] = [];
   elimina_paquete_producto: any[] = [];
   idSecuencia: any[] = [];
@@ -92,6 +89,10 @@ export class FormVentas implements OnInit {
   mostrarDialog6: boolean = false;
   fecha_actual: any = '';
   date: Date = new Date();
+  num_mes: any = '';
+  num_year: any = '';
+  data_venta: any[] = [];
+
 
   constructor(
     private ventas: VentasSerivice,
@@ -103,7 +104,8 @@ export class FormVentas implements OnInit {
     private r_cliente: ClientesService,
     private pagos_c: PagosConsumosServices,
     private inventario: InventarioService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private apertura_c: AperturaCajaService
 
   ) {
 
@@ -127,7 +129,6 @@ export class FormVentas implements OnInit {
       factura: [null, Validators.required]
     });
     this.user = localStorage.getItem('user');
-    //this.funct_actualiza_data_indexieBD();
     this.funct_retorna_ventas();
     this.funct_retorna_clientes_c();
     this.funct_retorna_factura_c();
@@ -143,6 +144,8 @@ export class FormVentas implements OnInit {
     this.fecha_apertura = localStorage.getItem('fecha_apertura');
     this.fecha_actual = format(this.date, 'yyyy-MM-dd');
     this.factura = localStorage.getItem('factura');
+    this.num_mes = format(this.date, 'M');
+    this.num_year = format(this.date, 'yyyy');
 
   }
 
@@ -158,7 +161,7 @@ export class FormVentas implements OnInit {
     this.ventas.funct_retorna_ventas_temp().subscribe({
       next: (result: any) => {
         const data = Array.isArray(result) ? result : [];
-        this.products = data.filter((v: any) => v.estado === 'abierto1').reverse();
+        this.products = data.filter((v: any) => v.estado_venta === 'Abierto').reverse();
         this.total_articulos = this.products.length;
         this.total_venta = 0;
         this.habilitado = false;
@@ -181,6 +184,14 @@ export class FormVentas implements OnInit {
     });
   }
 
+  funct_retorna_apertura_caja() {
+    this.apertura_c.funct_retorna_apertura_caja(this.user).subscribe({
+      next: (data: any) => {
+
+      }
+    })
+  }
+
   funct_retorna_producto(): void {
     const codigo = this.data.value.codProducto;
 
@@ -197,17 +208,26 @@ export class FormVentas implements OnInit {
     }
 
     this.vinculos.funct_retorna_codigo_inicial(codigo).subscribe({
-      next: (response: any) => {
+      next: (result: any) => {
 
-        if (response.statusCode === 404 || !response?.length) {
+        if (result.statusCode === 404 || !result?.length) {
           this.message.add({ severity: 'error', summary: 'Error:', detail: 'El producto que intenta vender no existe o no se encuentra asociado', life: 3000 });
           return;
         }
-        const producto = response[0].producto;
+
         this.producto_unidad = [];
         this.idApertCaja = localStorage.getItem('id_caja');
 
-        this.ventas.funct_registra_ventas_temp(producto, this.origen_venta, this.openventas, this.idApertCaja, this.factura).subscribe({
+        this.data_venta = [];
+        this.data_venta.push({
+          data: [result[0].producto],
+          id_caja: this.idApertCaja,
+          factura: this.factura,
+          user: this.user,
+          sucursal: 1
+        })
+
+        this.ventas.funct_registra_ventas_temp(this.data_venta).subscribe({
           next: (ventaResponse: any) => {
             this.data.patchValue({
               codProducto: ''
@@ -235,7 +255,6 @@ export class FormVentas implements OnInit {
           this.factura = id.num_secuencia + 1;
           localStorage.setItem('factura', this.factura);
           this.cdr.detectChanges();
-          console.log("Prueba",);
         }, 1000)
       }
     })
@@ -262,7 +281,7 @@ export class FormVentas implements OnInit {
         this.ventas.funct_retorna_ventas_temp()
       ), tap((carrito: any) => {
 
-        const abiertos = carrito.filter((item: any) => item.estado === 'abierto1');
+        const abiertos = carrito.filter((item: any) => item.estado_venta === 'Abierto');
         this.products = abiertos.sort((a: any, b: any) => b.id - a.id);
 
         this.total_articulos = abiertos.length;
@@ -338,16 +357,11 @@ export class FormVentas implements OnInit {
 
     if (this.idSecuencia[0].numero_factura != '' || this.idSecuencia[0].numero_factura != 0) {
       this.reimprime.funct_imprime_facturas(this.idSecuencia[0].numero_factura);
-      this.visible2 = false;
       this.functInpuFocus();
     } else {
       this.message.add({ severity: 'error', summary: 'Error:', detail: 'Para reimprimir debe ingresar un número de ticket', life: 3000 });
     }
 
-  }
-
-  ngOnDestroy() {
-    this.dataService$?.unsubscribe();
   }
 
   funct_elimina_id_ventas() {
@@ -397,11 +411,20 @@ export class FormVentas implements OnInit {
 
   onRowSelect(event: any) {
     this.vinculos.funct_retorna_codigo_inicial(event.data.codProd).subscribe({
-      next: (data: any) => {
-        if (data.length > 0) {
+      next: (result: any) => {
+        if (result.length > 0) {
           this.ventas.funct_elimina_ventas_temp(this.elimina_paquete_producto[0]).subscribe({
             next: (data2: any) => {
-              this.ventas.funct_registra_ventas_temp(data[0].producto, this.origen_venta, this.openventas, this.idApertCaja, this.factura).subscribe({
+              this.data_venta = [];
+              this.data_venta.push({
+                data: [result[0].producto],
+                id_caja: this.idApertCaja,
+                factura: this.factura,
+                user: this.user,
+                sucursal: 1
+              });
+
+              this.ventas.funct_registra_ventas_temp(this.data_venta).subscribe({
                 next: data => {
                   this.funct_retorna_ventas();
                   this.functInpuFocus();
@@ -453,7 +476,7 @@ export class FormVentas implements OnInit {
 
   funct_retorna_clientes_c() {
     this.r_cliente.funct_retorna_clientes_s().subscribe({
-      next: data => {
+      next: (data: any) => {
         const objData = JSON.stringify(data);
         const obj = JSON.parse(objData);
         this.clientes = [];

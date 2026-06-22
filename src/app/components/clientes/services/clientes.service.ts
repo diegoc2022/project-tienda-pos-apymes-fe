@@ -30,5 +30,4 @@ export class ClientesService {
       "codigo_cliente": data
     })
   }
-
 }

@@ -58,7 +58,7 @@ export class ListaProductos {
 
   funct_retorna_productos() {
     this.visible = true;
-    this.productos.funct_retorna_full_productos().subscribe({
+    this.productos.funct_retorna_productos().subscribe({
       next: (data: any) => {
         this.data = [];
         for (let index = 0; index < data.length; index++) {

@@ -4,31 +4,55 @@
         <p class="pi pi-apple"> Nuevo producto:</p>
         <br>
         <span> Fecha:
-            {{fecha_actual}}
+            {{fecha_actual | date:'dd-MM-yyyy'}}
         </span>
         <br>
         <hr>
         <div class="content">
             <form [formGroup]="formProductos">
-                <div class="flex flex-col gap-2">
-                    <label for="codigo">Lea código producto</label>
-                    <input id="codigo" type="text" pInputText formControlName="codProd"
-                        (keyup.enter)="on_enter_codigo_producto($event)" autocomplete="off" />
+                <div class="item">
+                    <div class="flex flex-col">
+                        <label for="codigo">Lea código producto</label>
+                        <input id="codigo" type="text" pInputText formControlName="codProd"
+                            (keyup.enter)="on_enter_codigo_producto($event)" autocomplete="off" />
+                    </div>
                 </div>
-                <div class="flex flex-col gap-2 mt-2">
-                    <label for="nombre-p">Nombre producto</label>
-                    <input id="nombre-p" type="text" pInputText formControlName="nombre"
-                        (keyup.enter)="on_enter_nombres_producto($event)" autocomplete="off">
+                <div class="item">
+                    <div class="flex flex-col">
+                        <label for="nombre-p">Nombre producto</label>
+                        <input id="nombre-p" type="text" pInputText formControlName="nombre"
+                            (keyup.enter)="on_enter_nombres_producto($event)" autocomplete="off">
+                    </div>
                 </div>
-                <div class="flex flex-col gap-2 mt-2">
-                    <label for="mySelect">Proveedor</label>
-                    <p-select #mySelect class="w-full md:w-56" [(ngModel)]="seleccionado" placeholder="Elija proveedor"
-                        [options]="data_proveedor" optionValue="nit" optionLabel="nombre" [showClear]="true"
-                        formControlName="codProv" />
+                <div class="item">
+                    <div class="flex flex-col">
+                        <label for="mySelect">Impuestos %</label>
+                        <p-select #mySelect class="md:w-56" [(ngModel)]="seleccionado" placeholder="Elija valor iva"
+                            [options]="impuestos" optionValue="valor_iva" optionLabel="valor_iva" [showClear]="true"
+                            formControlName="valor_iva" />
+                    </div>
                 </div>
-                <div class="flex flex-col gap-2 mt-4">
-                    <button pButton pRipple type="button" icon="pi pi-save" label="Guardar"
-                        class="p-button-success w-full" (click)="funct_registra_nuevo_producto();"></button>
+                <div class="item">
+                    <div class="flex flex-col">
+                        <label for="mySelect">Categoria</label>
+                        <p-select #mySelect class=" md:w-56" [(ngModel)]="seleccionado2" placeholder="Elija categoria"
+                            [options]="categoria" optionValue="id" optionLabel="nombre" [showClear]="true"
+                            formControlName="categoria" />
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="flex flex-col">
+                        <label for="mySelect">Proveedor</label>
+                        <p-select #mySelect class="md:w-56" [(ngModel)]="seleccionado3" placeholder="Elija proveedor"
+                            [options]="data_proveedor" optionValue="nit" optionLabel="nombre" [showClear]="true"
+                            formControlName="codProv" />
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="flex flex-col mt-3">
+                        <button pButton pRipple type="button" icon="pi pi-save" label="Guardar"
+                            class="p-button-success w-full" (click)="funct_registra_nuevo_producto();"></button>
+                    </div>
                 </div>
             </form>
         </div>
