@@ -80,6 +80,8 @@ export class BuscaProductos {
   funct_retorna_productos() {
     this.productos.funct_retorna_full_productos().subscribe({
       next: (data: any) => {
+        console.log("Data: ", data);
+
         this.dataBuscaProductos = []
         for (let index = 0; index < data.length; index++) {
           this.dataBuscaProductos.push(data[index]);
