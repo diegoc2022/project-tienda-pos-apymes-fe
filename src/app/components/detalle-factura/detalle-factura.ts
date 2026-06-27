@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, Inp
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription, switchMap } from 'rxjs';
 import { VentasSerivice } from '../form-ventas/services/ventas.serivice';
-import { SecuenciaService } from '../secuencias/services/secuencia.service';
+import { SecuenciaService } from '../utils/services/secuencia';
 import { MessageService } from 'primeng/api';
 import { ImprimeService } from './services/imprime.service';
 import { InventarioService } from '../inventario/services/inventario.service';

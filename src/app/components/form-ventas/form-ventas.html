@@ -45,7 +45,7 @@
                 title="Otras ventas" (click)="funct_dialog_otras_ventas();"></button>
         </div>
         <div class="item-1-2">
-            <button pButton pRipple type="button" icon="pi pi-pound" class="p-button-rounded p-button-success"
+            <button pButton pRipple type="button" icon="pi pi-save" class="p-button-rounded p-button-success"
                 title="Facturación electrónica" [disabled]="habilitado"
                 (click)="funct_dialog_detalle_factura();"></button>
         </div>
@@ -69,7 +69,7 @@
                             <th>Descripción</th>
                             <th>Existencia</th>
                             <th>Precio venta</th>
-                            <th>Iva %</th>
+                            <th>Iva</th>
                             <th>Total Iva</th>
                             <th class="centered">Cantidad</th>
                             <th>Subtotal</th>
@@ -92,7 +92,7 @@
                                     {{rowData.precio_venta | currency:'$'}}
                                 </div>
                             </td>
-                            <td>{{rowData.iva}}</td>
+                            <td>{{rowData.iva}}%</td>
                             <td>{{rowData.total_iva | currency}}</td>
                             <td pEditableColumn class="centered">
                                 <p-cellEditor>
@@ -163,7 +163,7 @@
 
 <app-busca-productos [visible]="mostrarDialog"></app-busca-productos>
 <app-otras-ventas [visible]="mostrarDialog2"></app-otras-ventas>
-<app-detalle-factura [visible]="mostrarDialog5"></app-detalle-factura>
+<app-detalle-factura-fe [visible]="mostrarDialog5"></app-detalle-factura-fe>
 
 <p-dialog header="Producto unidad:" [(visible)]="mostrarDialog3" [closable]="true" styleClass="mi-dialogo3">
     <div class="div-dialogo">

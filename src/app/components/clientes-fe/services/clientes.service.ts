@@ -48,4 +48,9 @@ export class ClientesFeService {
     return this.http.post(`${this.URL}/${this.API6}`, data);
   }
 
+  funct_retorna_one_cliente_s(ident: number) {
+    return this.http.get(`${this.URL}/${this.API6}/${ident}`);
+  }
+
+
 }

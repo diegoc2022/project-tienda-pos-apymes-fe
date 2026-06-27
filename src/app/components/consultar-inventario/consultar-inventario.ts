@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 import { AperturaInventarioService } from '../apertura-inventario/services/apertura-inventario.service';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InventarioService } from '../inventario/services/inventario.service';
-import { DownloadService } from '../download/download.service';
+import { DownloadService } from '../utils/services/download';
 
 @Component({
   selector: 'app-consultar-inventario',

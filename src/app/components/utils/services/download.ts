@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import jsPDF from 'jspdf';
-import { InventarioService } from '../inventario/services/inventario.service';
-import { EncabezadosServices } from '../encabezados/encabezados';
-import { formatearFecha } from '../formato-fecha/formato-fecha';
+import { InventarioService } from '../../inventario/services/inventario.service';
+import { EncabezadosServices } from './encabezados';
+import { formatearFecha } from '../../formato-fecha/formato-fecha';
 
 @Injectable({
   providedIn: 'root',

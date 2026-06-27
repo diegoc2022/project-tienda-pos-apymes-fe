@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import jsPDF from 'jspdf';
 import { VentasSerivice } from '../../form-ventas/services/ventas.serivice';
-import { EncabezadosServices } from '../../encabezados/encabezados';
+import { EncabezadosServices } from '../../utils/services/encabezados';
 
 @Injectable({
   providedIn: 'root',

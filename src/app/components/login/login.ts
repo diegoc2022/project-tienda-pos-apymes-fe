@@ -11,7 +11,7 @@ import { ImageModule } from 'primeng/image';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { IftaLabelModule } from 'primeng/iftalabel';
-import { EncabezadosServices } from '../encabezados/encabezados';
+import { EncabezadosServices } from '../utils/services/encabezados';
 
 @Component({
   selector: 'app-login',

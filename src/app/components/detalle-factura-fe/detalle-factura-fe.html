@@ -1,1 +1,75 @@
-<p>detalle-factura-fe works!</p>
+<p-toast position="bottom-left"></p-toast>
+<p-dialog header="Total a pagar:" [(visible)]="visible" (visibleChange)="visibleChange.emit($event)" [modal]="true"
+    styleClass="mi-dialogo" [closable]="false">
+    <div class="content-int">
+        <form [formGroup]="form">
+            <div class="content-1">
+                <div class="item-1">
+                    <div class="flex flex-col gap-2 mt-2">
+                        <label for="cedula">Cédula o Nit:</label>
+                        <input id="ident" type="text" class="form-control" pInputText formControlName="ident"
+                            (keyup.enter)="funct_retorna_cliente_fe($event)" autocomplete="off">
+                    </div>
+                </div>
+                <div class="item-1-1">
+                    <div class="flex flex-col gap-2 mt-2">
+                        <label for="cedula">Nombre:</label>
+                        <input id="cedula" type="text" class="form-control" pInputText autocomplete="off"
+                            formControlName="nombre" readonly>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="content-2">
+                <div class="item-2">
+                    <div class="flex flex-col">
+                        <label for="mySelect">Forma de pago</label>
+                        <p-select id="mySelect" [(ngModel)]="seleccionado" [options]="forma_de_pago" optionValue="id"
+                            optionLabel="nombre" [showClear]="true" formControlName="forma_pago" />
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="content-3">
+                <div class="item-3">
+                    <div class="flex flex-col">
+                        <label for="efectivo">Total a pagar:</label>
+                        <p-inputnumber inputId="efectivo" autofocus mode="currency" currency="USD" locale="en-US"
+                            [minFractionDigits]="0" [maxFractionDigits]="0" autocomplete="off"
+                            formControlName="total_pago" />
+                    </div>
+                </div>
+                <div class="item-3">
+                    <div class="flex flex-col">
+                        <label for="efectivo">Monto recibido:</label>
+                        <p-inputnumber inputId="monto_rec" formControlName="efectivo" utofocus mode="currency"
+                            currency="USD" locale="en-US" [minFractionDigits]="0" [maxFractionDigits]="0"
+                            autocomplete="off" formControlName="monto_rec" />
+                    </div>
+                    <div class="item-3">
+                        <div class="flex flex-col">
+                            <label for="efectivo">Cambio:</label>
+                            <p-inputnumber inputId="efectivo" autofocus mode="currency" currency="USD" locale="en-US"
+                                [minFractionDigits]="0" [maxFractionDigits]="0" autocomplete="off"
+                                formControlName="cambio" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <hr>
+        <div class="content-4">
+            <div class="item-4">
+                <button pButton pRipple label="Guardar" icon="pi pi-save" class="p-button-success w-full"></button>
+            </div>
+            <div class="item-4">
+                <button pButton pRipple label="Cerrar" icon="pi pi-times-circle" class="p-button-help w-full"
+                    (click)="funt_close_dialog_detalle_factura();"></button>
+            </div>
+            <div class="item-4">
+                <button pButton pRipple label="Imprimir" icon="pi pi-print" class="p-button-warn w-full"
+                    [disabled]="habilitado"></button>
+            </div>
+        </div>
+    </div>
+</p-dialog>

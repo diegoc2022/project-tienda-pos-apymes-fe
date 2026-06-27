@@ -3,7 +3,7 @@ import { switchMap, tap } from 'rxjs';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { VinculosService } from '../vinculos/services/vinculos.service';
-import { SecuenciaService } from '../secuencias/services/secuencia.service';
+import { SecuenciaService } from '../utils/services/secuencia';
 import { PagosConsumosServices } from '../pagos-consumos/services/pagos-consumos.services';
 import Swal, { SweetAlertOptions } from 'sweetalert2';
 import { VentasSerivice } from './services/ventas.serivice';
@@ -22,11 +22,11 @@ import { ChangeDetectorRef } from '@angular/core';
 import { OtrasVentas } from '../otras-ventas/otras-ventas';
 import { BadgeModule } from 'primeng/badge';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
-import { DetalleFactura } from '../detalle-factura/detalle-factura';
 import { ImprimeService } from '../detalle-factura/services/imprime.service';
 import { format } from 'date-fns';
 import { ClientesService } from '../clientes/services/clientes.service';
 import { AperturaCajaService } from '../apertura-caja/services/apertura-caja.service';
+import { DetalleFacturaFe } from '../detalle-factura-fe/detalle-factura-fe';
 
 
 
@@ -47,11 +47,11 @@ import { AperturaCajaService } from '../apertura-caja/services/apertura-caja.ser
     InputNumberModule,
     InputTextModule,
     CheckboxModule,
-    BuscaProductos,
-    OtrasVentas,
     BadgeModule,
     OverlayBadgeModule,
-    DetalleFactura
+    DetalleFacturaFe,
+    BuscaProductos,
+    OtrasVentas
   ],
   providers: [MessageService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
