@@ -19,13 +19,9 @@ export class SecuenciaService {
     return this.http.get<string>(`${this.URL}/${this.API}`);
   }
 
-  funct_genera_factura_s(data: any[]): Observable<any[]> {
-    return this.http.put<any[]>(`${this.URL}/${this.API}`, data,
-      {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-    );
+  funct_genera_factura_s(data: any): Observable<any> {
+    return this.http.put(`${this.URL}/${this.API}`, {
+      num_secuencia: data
+    });
   }
 }

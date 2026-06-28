@@ -69,7 +69,7 @@ export class FormVentas implements OnInit {
   total_articulos: number = 1;
   idApertCaja: any = 0;
   factura: any = 0;
-  habilitado: boolean = false;
+  habilitado: boolean = true;
   producto_unidad: any[] = [];
   elimina_paquete_producto: any[] = [];
   idSecuencia: any[] = [];
@@ -140,12 +140,18 @@ export class FormVentas implements OnInit {
     this.mostrarDialog5 = false;
     this.mostrarDialog6 = false
     this.total_articulos = 1;
-    this.habilitado = false;
+    this.habilitado = true
     this.fecha_apertura = localStorage.getItem('fecha_apertura');
     this.fecha_actual = format(this.date, 'yyyy-MM-dd');
     this.factura = localStorage.getItem('factura');
     this.num_mes = format(this.date, 'M');
     this.num_year = format(this.date, 'yyyy');
+
+    if (this.total_articulos == 1) {
+      this.habilitado = true;
+    } else {
+      this.habilitado = false;
+    }
 
   }
 
@@ -192,13 +198,11 @@ export class FormVentas implements OnInit {
     })
   }
 
-  funct_retorna_producto(): void {
+  funct_retorna_producto_lectura() {
     const codigo = this.data.value.codProducto;
-
     if (!codigo) {
       return;
     }
-
     if (this.fecha_apertura != this.fecha_actual) {
       this.message.add({ severity: 'warn', summary: 'Advertencia:', detail: 'Para realizar una venta, primero debe crear apertura de caja', life: 5000 });
       this.data.patchValue({
@@ -207,44 +211,41 @@ export class FormVentas implements OnInit {
       return;
     }
 
-    this.vinculos.funct_retorna_codigo_inicial(codigo).subscribe({
-      next: (result: any) => {
-
-        if (result.statusCode === 404 || !result?.length) {
-          this.message.add({ severity: 'error', summary: 'Error:', detail: 'El producto que intenta vender no existe o no se encuentra asociado', life: 3000 });
-          return;
-        }
-
-        this.producto_unidad = [];
-        this.idApertCaja = localStorage.getItem('id_caja');
-
-        this.data_venta = [];
-        this.data_venta.push({
-          data: [result[0].producto],
-          id_caja: this.idApertCaja,
-          factura: this.factura,
-          user: this.user,
-          sucursal: 1
+    this.vinculos.funct_retorna_codigo_inicial(codigo)
+      .pipe(
+        switchMap((result: any) => {
+          return this.apertura_c.funct_retorna_apertura_caja(this.user).pipe(
+            tap((data: any) => {
+              console.log("id caja: ", data);
+              this.data_venta = [];
+              this.data_venta.push({
+                data: [result[0].producto],
+                id_caja: data.id_caja,
+                factura: this.factura,
+                user: this.user,
+                sucursal: 1
+              })
+            })
+          )
+        }),
+        switchMap(() => {
+          return this.ventas.funct_registra_ventas_temp(this.data_venta);
         })
+      )
+      .subscribe({
+        next: (result: any) => {
 
-        this.ventas.funct_registra_ventas_temp(this.data_venta).subscribe({
-          next: (ventaResponse: any) => {
-            this.data.patchValue({
-              codProducto: ''
-            });
-            this.funct_retorna_ventas();
-            this.functInpuFocus();
-            this.cdr.detectChanges();
-          }, error: (error) => {
-            console.error('Error registrando venta:', error);
-            this.message.add({ severity: 'error', summary: 'Error', detail: 'No fue posible registrar la venta', life: 3000 });
-          }
-        });
-      }, error: (error) => {
-        console.error('Error consultando producto:', error);
-        this.message.add({ severity: 'error', summary: 'Error', detail: 'El producto que intenta agregar en el carrito, no existe o no se encuentra asociado', life: 3000 });
-      }
-    });
+
+          this.data.patchValue({
+            codProducto: ''
+          });
+          this.funct_retorna_ventas();
+          this.functInpuFocus();
+          this.cdr.detectChanges();
+
+        }
+      })
+
   }
 
   funct_retorna_factura_c() {
@@ -292,7 +293,7 @@ export class FormVentas implements OnInit {
         );
 
         this.habilitado = false;
-        this.cantidad = false;
+        //this.cantidad = false;
         this.producto_unidad = [];
         this.functInpuFocus();
         this.message.clear();

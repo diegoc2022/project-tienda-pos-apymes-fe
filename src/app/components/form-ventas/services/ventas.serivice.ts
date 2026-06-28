@@ -73,7 +73,7 @@ export class VentasSerivice {
   }
 
   funct_close_ventas_estado(data: any): Observable<any> {
-    return this.http.put(`${this.URL}/${this.API4}`, data);
+    return this.http.put(`${this.URL}/${this.API3}`, data);
   }
 
   funct_elimina_ventas_temp(data: any) {

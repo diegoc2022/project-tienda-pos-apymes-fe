@@ -1,21 +1,27 @@
 <p-toast position="bottom-left"></p-toast>
-<p-dialog header="Total a pagar:" [(visible)]="visible" (visibleChange)="visibleChange.emit($event)" [modal]="true"
-    styleClass="mi-dialogo" [closable]="false">
+<p-dialog header="Facturar electrónico:" [(visible)]="visible" (visibleChange)="visibleChange.emit($event)"
+    [modal]="true" styleClass="mi-dialogo" [closable]="false" (onShow)="funct_retorna_ventas_c()"
+    (onHide)="funct_retorna_ventas_c()">
     <div class="content-int">
         <form [formGroup]="form">
             <div class="content-1">
                 <div class="item-1">
-                    <div class="flex flex-col gap-2 mt-2">
-                        <label for="cedula">Cédula o Nit:</label>
-                        <input id="ident" type="text" class="form-control" pInputText formControlName="ident"
-                            (keyup.enter)="funct_retorna_cliente_fe($event)" autocomplete="off">
-                    </div>
-                </div>
-                <div class="item-1-1">
-                    <div class="flex flex-col gap-2 mt-2">
-                        <label for="cedula">Nombre:</label>
-                        <input id="cedula" type="text" class="form-control" pInputText autocomplete="off"
-                            formControlName="nombre" readonly>
+                    <div class="flex flex-col mt-2">
+                        <label for="mySelect">Cliente</label>
+                        <p-select [options]="data_clientes_fe" optionLabel="nombre" [filter]="true" filterBy="nombre"
+                            [showClear]="false" class="w-full md:w-56" formControlName="cliente"
+                            (onChange)="funct_retorna_one_cliente_fe($event)">
+                            <ng-template #selectedItem let-selectedOption>
+                                <div class="flex items-center gap-2">
+                                    <div>{{ selectedOption.nombre }}</div>
+                                </div>
+                            </ng-template>
+                            <ng-template let-clientes #item>
+                                <div class="flex items-center">
+                                    <div>{{ clientes.nombre }}</div>
+                                </div>
+                            </ng-template>
+                        </p-select>
                     </div>
                 </div>
             </div>
@@ -23,9 +29,16 @@
             <div class="content-2">
                 <div class="item-2">
                     <div class="flex flex-col">
-                        <label for="mySelect">Forma de pago</label>
-                        <p-select id="mySelect" [(ngModel)]="seleccionado" [options]="forma_de_pago" optionValue="id"
-                            optionLabel="nombre" [showClear]="true" formControlName="forma_pago" />
+                        <label for="forma_pago">Medio de pago</label>
+                        <p-select #forma_pago [options]="medio_de_pago" optionValue="id" optionLabel="nombre"
+                            [showClear]="true" formControlName="medio_pago" />
+                    </div>
+                </div>
+                <div class="item-2">
+                    <div class="flex flex-col">
+                        <label for="forma_pago">Forma de pago</label>
+                        <p-select #forma_pago [options]="forma_de_pago" optionValue="id" optionLabel="nombre"
+                            [showClear]="true" formControlName="forma_pago" />
                     </div>
                 </div>
             </div>
@@ -36,22 +49,22 @@
                         <label for="efectivo">Total a pagar:</label>
                         <p-inputnumber inputId="efectivo" autofocus mode="currency" currency="USD" locale="en-US"
                             [minFractionDigits]="0" [maxFractionDigits]="0" autocomplete="off"
-                            formControlName="total_pago" />
+                            formControlName="total_pago" readonly />
                     </div>
                 </div>
                 <div class="item-3">
                     <div class="flex flex-col">
-                        <label for="efectivo">Monto recibido:</label>
-                        <p-inputnumber inputId="monto_rec" formControlName="efectivo" utofocus mode="currency"
-                            currency="USD" locale="en-US" [minFractionDigits]="0" [maxFractionDigits]="0"
-                            autocomplete="off" formControlName="monto_rec" />
+                        <label for="monto_rec">Monto recibido:</label>
+                        <p-inputnumber #monto_rec mode="currency" currency="USD" locale="en-US" [minFractionDigits]="0"
+                            [maxFractionDigits]="0" autocomplete="off" formControlName="monto_rec"
+                            (keydown.enter)="funct_calcula_efectivo()" />
                     </div>
                     <div class="item-3">
                         <div class="flex flex-col">
                             <label for="efectivo">Cambio:</label>
                             <p-inputnumber inputId="efectivo" autofocus mode="currency" currency="USD" locale="en-US"
                                 [minFractionDigits]="0" [maxFractionDigits]="0" autocomplete="off"
-                                formControlName="cambio" />
+                                formControlName="cambio" readonly />
                         </div>
                     </div>
                 </div>
@@ -60,7 +73,8 @@
         <hr>
         <div class="content-4">
             <div class="item-4">
-                <button pButton pRipple label="Guardar" icon="pi pi-save" class="p-button-success w-full"></button>
+                <button pButton pRipple label="Guardar" icon="pi pi-save" class="p-button-success w-full"
+                    (click)="funct_close_detalle_factura();"></button>
             </div>
             <div class="item-4">
                 <button pButton pRipple label="Cerrar" icon="pi pi-times-circle" class="p-button-help w-full"
