@@ -70,9 +70,10 @@
                             <th>Existencia</th>
                             <th>Precio venta</th>
                             <th>Iva</th>
-                            <th>Total Iva</th>
                             <th class="centered">Cantidad</th>
                             <th>Subtotal</th>
+                            <th>Total Iva</th>
+                            <th>Total neto</th>
                             <th class="centered">Acción</th>
                         </tr>
                     </ng-template>
@@ -93,7 +94,6 @@
                                 </div>
                             </td>
                             <td>{{rowData.iva}}%</td>
-                            <td>{{rowData.total_iva | currency}}</td>
                             <td pEditableColumn class="centered">
                                 <p-cellEditor>
                                     <ng-template pTemplate="input">
@@ -109,7 +109,9 @@
                                     </ng-template>
                                 </p-cellEditor>
                             </td>
-                            <td>{{rowData.subtotal | currency}}</td>
+                            <td>{{rowData.total_sin_iva | currency}}</td>
+                            <td>{{rowData.total_iva | currency}}</td>
+                            <td>{{rowData.total_neto | currency}}</td>
                             <td style="flex: 5rem 5rem 5rem" class="centered">
                                 <button pButton pRipple type="button" icon="pi pi-trash"
                                     class="p-button-rounded p-button-text p-button-plain p-button-sm p-button2"

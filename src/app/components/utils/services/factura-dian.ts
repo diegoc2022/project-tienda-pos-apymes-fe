@@ -18,7 +18,6 @@ export class DataFacturaDian {
   funt_envia_factura_dian_s(data: any[]): Observable<any[]> {
     console.log("Data: ", data);
 
-
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });

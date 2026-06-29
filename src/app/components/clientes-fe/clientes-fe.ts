@@ -60,6 +60,7 @@ export class ClientesFe {
       tipo_org: ['', Validators.required],
       tipo_resp: ['', Validators.required],
       tipo_reg: ['', Validators.required],
+      dir: ['', Validators.required],
     });
     this.fecha_actual = format(this.date, 'yyyy-MM-dd HH:mm:ss');
     this.funct_retorna_municipio();

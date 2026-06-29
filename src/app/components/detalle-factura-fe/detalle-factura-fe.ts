@@ -17,6 +17,7 @@ import { FormVentas } from '../form-ventas/form-ventas';
 import { SecuenciaService } from '../utils/services/secuencia';
 import { FormaDePago } from '../utils/services/forma-pago';
 import { DataFacturaDian } from '../utils/services/factura-dian';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-detalle-factura-fe',
@@ -34,7 +35,7 @@ import { DataFacturaDian } from '../utils/services/factura-dian';
     InputTextModule,
     SelectModule
   ],
-  providers: [MessageService],
+  providers: [MessageService, DataFacturaDian],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class DetalleFacturaFe {
@@ -48,13 +49,15 @@ export class DetalleFacturaFe {
   habilitado: boolean = true;
   medio_de_pago: any[] = [];
   forma_de_pago: any[] = [];
-  data_factura_dian: any[] = [];
+  data_cliente_fact: any[] = [];
   data_clientes_fe: any[] = [];
   ventasProductos: any[] = [];
   venta_total: number = 0;
   total_cambio: number = 0;
   id_factura: any[] = [];
-
+  fecha_actual: any = '';
+  hora: any = '';
+  date: Date = new Date();
 
   constructor(
     private fb: FormBuilder,
@@ -76,7 +79,7 @@ export class DetalleFacturaFe {
       medio_pago: [null, Validators.required],
       forma_pago: [null, Validators.required],
       total_pago: [null, Validators.required],
-      monto_rec: [null, Validators.required],
+      monto_rec: [0, Validators.required],
       cambio: [null, Validators.required]
     });
 
@@ -86,6 +89,8 @@ export class DetalleFacturaFe {
     this.funct_retorna_forma_de_pago_c();
     this.funct_retorna_all_clientes_fe_c();
     this.funct_retorna_cliente_predeterminado_c();
+    this.fecha_actual = format(this.date, 'yyyy-MM-dd');
+    this.hora = format(this.date, 'HH:MM:SS');
   }
 
   funt_close_dialog_detalle_factura() {
@@ -123,8 +128,8 @@ export class DetalleFacturaFe {
   funct_retorna_one_cliente_fe(data: any) {
     this.cliente_fe.funct_retorna_one_cliente_s(data.value.ident).subscribe({
       next: (data: any) => {
-        this.data_factura_dian = [];
-        this.data_factura_dian.push(data[0]);
+        this.data_cliente_fact = [];
+        this.data_cliente_fact.push(data[0]);
       }
     });
   }
@@ -133,8 +138,8 @@ export class DetalleFacturaFe {
     const ident = '222222222222';
     this.cliente_fe.funct_retorna_one_cliente_s(ident).subscribe({
       next: (data: any) => {
-        this.data_factura_dian = [];
-        this.data_factura_dian.push(data[0]);
+        this.data_cliente_fact = [];
+        this.data_cliente_fact.push(data[0]);
       }
     });
   }
@@ -168,7 +173,7 @@ export class DetalleFacturaFe {
             item.estado_venta === 'Abierto'
         );
         this.venta_total = this.ventasProductos.reduce(
-          (total: number, item: any) => total + item.subtotal,
+          (total: number, item: any) => total + item.total_neto,
           0
         );
         this.cdr.detectChanges();
@@ -216,22 +221,23 @@ export class DetalleFacturaFe {
         return this.secuencia.funct_genera_factura_s(numFactura).pipe(
           switchMap(() => {
             const data = [{
-              ident: this.form.value.ident,
-              nombre: this.form.value.nombre,
+              num_factura: numFactura,
+              data_cliente: this.data_cliente_fact,
               cambio: this.form.value.cambio,
               forma_pago: this.form.value.forma_pago,
               medio_pago: this.form.value.medio_pago,
               monto_rec: this.form.value.monto_rec,
               total_pago: this.form.value.total_pago,
-              data_venta: this.ventasProductos
+              data_venta: this.ventasProductos,
+              fecha_emision: this.fecha_actual,
+              hora_emision: this.hora
             }]
-            return this.data_factura.funt_envia_factura_dian_s(data)
+            return this.data_factura.funt_envia_factura_dian_s(data);
           })
         )
       })
     ).subscribe({
       next: () => {
-
         this.visible = false;
         this.formventas.funct_retorna_factura_c();
         setTimeout(() => {

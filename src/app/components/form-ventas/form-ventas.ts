@@ -173,7 +173,7 @@ export class FormVentas implements OnInit {
         this.habilitado = false;
         this.cantidad = false;
         this.products.forEach((item: any) => {
-          this.total_venta += item.subtotal;
+          this.total_venta += item.total_neto;
           if (
             item.existencia < 1 ||
             item.precio_compra > item.precio_venta
